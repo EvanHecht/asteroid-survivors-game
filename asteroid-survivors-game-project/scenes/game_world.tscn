@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfwjy4i7ixgr"]
+
+[ext_resource type="PackedScene" uid="uid://r5hn0upohhcl" path="res://scenes/player.tscn" id="1_0biqy"]
+[ext_resource type="Texture2D" uid="uid://dtvtefcn7giq2" path="res://textures/white_square_64x64.png" id="1_47u71"]
+
+[node name="GameWorld" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(100, 100)
+texture = ExtResource("1_47u71")
+
+[node name="player" parent="." instance=ExtResource("1_0biqy")]
+position = Vector2(311, 183)
