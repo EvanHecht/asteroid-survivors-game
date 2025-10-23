@@ -3,11 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://c2sdh6g0dfact" path="res://textures/sprite.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ujf0nix40yyk" path="res://scripts/player.gd" id="1_g2els"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(40, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 8.0
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294967040
+platform_wall_layers = 1
 script = ExtResource("1_g2els")
 
 [node name="sprite" type="Sprite2D" parent="."]
@@ -16,4 +19,4 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_3vyb7")
 
 [node name="movement_collider" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qhqgy")
+shape = SubResource("CircleShape2D_g2els")
