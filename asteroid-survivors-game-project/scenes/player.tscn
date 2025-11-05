@@ -18,5 +18,11 @@ rotation = 1.5707964
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_3vyb7")
 
+[node name="bullet_origin" type="Marker2D" parent="sprite"]
+position = Vector2(-1.7484555e-05, -399.99997)
+
 [node name="movement_collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g2els")
+
+[node name="fire_timer" type="Timer" parent="."]
+one_shot = true

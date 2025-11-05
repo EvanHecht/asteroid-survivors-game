@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://vbkljmxpeg6j"]
+
+[ext_resource type="Script" uid="uid://barnkbmn2rh4t" path="res://scenes/asteroid_manager.gd" id="1_grk4n"]
+
+[node name="AsteroidManager" type="Node2D"]
+script = ExtResource("1_grk4n")
+
+[node name="spawn_timer" type="Timer" parent="."]
+wait_time = 0.009999999999999998
+autostart = true

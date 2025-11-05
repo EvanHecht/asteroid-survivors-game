@@ -4,14 +4,17 @@ extends CharacterBody2D
 const bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
 
 @onready var sprite: Sprite2D = $sprite
+@onready var bullet_origin: Marker2D = $sprite/bullet_origin
+@onready var fire_timer: Timer = $fire_timer
 
 @export var top_speed = 20
 var current_speed = 0
 var acceleration = 15
 var direction = 0
+var fire_rate = .3
 
-func  _draw() -> void:
-	draw_line(Vector2.ZERO, velocity, Color.RED, 5)
+#func  _draw() -> void:
+#	draw_line(Vector2.ZERO, velocity, Color.RED, 5)
 	
 func _ready() -> void:
 	wall_min_slide_angle = 0
@@ -41,9 +44,10 @@ func _physics_process(delta: float) -> void:
 	sprite.rotation = direction + PI / 2
 	queue_redraw()
 
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_pressed("shoot") and fire_timer.is_stopped():
+		fire_timer.start(fire_rate)
 		var bullet: Bullet = bullet_scene.instantiate()
-		bullet.position = position
+		bullet.global_position = bullet_origin.global_position
 		bullet.velocity = Vector2.from_angle(direction) * 750
 		get_tree().root.add_child(bullet)
 		# BIG POWER BELOW
