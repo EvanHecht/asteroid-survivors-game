@@ -3,15 +3,18 @@ extends CharacterBody2D
 
 const bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
 
-@onready var sprite: Sprite2D = $sprite
-@onready var bullet_origin: Marker2D = $sprite/bullet_origin
-@onready var fire_timer: Timer = $fire_timer
+@onready var sprite: Sprite2D = %Sprite
+@onready var bullet_origin: Marker2D = %BulletOrigin
+@onready var fire_timer: Timer = %FireTimer
+@onready var hurt_box: Area2D = %HurtBox
+@onready var hit_timer: Timer = %HitTimer
 
 @export var top_speed = 20
 var current_speed = 0
 var acceleration = 15
 var direction = 0
 var fire_rate = .3
+var health = 5
 
 #func  _draw() -> void:
 #	draw_line(Vector2.ZERO, velocity, Color.RED, 5)
@@ -57,3 +60,15 @@ func _physics_process(delta: float) -> void:
 			#new_bullet.position = position
 			#new_bullet.velocity = Vector2.from_angle(deg_to_rad(i)) * 750
 			#get_tree().root.add_child(new_bullet)
+			
+	var overlapping_areas = hurt_box.get_overlapping_areas()
+	if (overlapping_areas.any(func(area): return area.get_parent() is Asteroid)):
+		on_asteroid_collision()
+
+func on_asteroid_collision():
+	if (hit_timer.is_stopped()):
+		hit_timer.start()
+		health -= 1
+		print(health)
+		if (health <= 0):
+			queue_free()

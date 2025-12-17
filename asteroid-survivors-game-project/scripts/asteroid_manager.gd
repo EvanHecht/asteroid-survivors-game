@@ -2,7 +2,7 @@ extends Node2D
 
 const asteroid_scene: PackedScene = preload("res://scenes/asteroid.tscn")
 
-@onready var spawn_timer: Timer = $spawn_timer
+@onready var spawn_timer: Timer = %SpawnTimer
 
 var spawn_offset: float = 460
 var wave_budget: int = 100
@@ -24,10 +24,6 @@ func spawn_asteroid():
 	var center: Vector2 = get_viewport_rect().size / 2
 	var spawn_point: Vector2 = center + (Vector2.from_angle(randf() * TAU).normalized()) * spawn_offset
 	var asteroid: Asteroid = asteroid_scene.instantiate()
-	var modifier_chance: float = randf();
-	var num_modifiers = floor(pow((modifier_chance + 1 - modifier_chance_increase_per_wave * current_wave), -2))
-	for i in range(0, num_modifiers):
-		asteroid.apply_modifier()
 	asteroid.global_position = spawn_point
 	asteroid.velocity = Vector2.from_angle((center - spawn_point).angle() + randf_range(-spawn_angle_spread, spawn_angle_spread)) * randi_range(15, 30)
 	get_tree().root.add_child(asteroid)

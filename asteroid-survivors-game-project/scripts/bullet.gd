@@ -1,7 +1,7 @@
 class_name Bullet
 extends Node2D
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = %Sprite
 var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
